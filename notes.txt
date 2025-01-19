@@ -1,0 +1,50 @@
+// use Illuminate\Http\Request
+//
+//
+// Request Object
+// Route::get('/request', function(Request $request) {
+//     return [
+//          'request' => $request->method(),
+//          'url' => $request->url(),
+//          'path' => $request->path(),
+//          'fullUrl' => $request->fullUrl(),
+//          'ip' => $request->ip(),
+//          'userAgent' => $request->userAgent(),
+//          'header' => $request->header(),
+//     ];
+// });
+
+// Query Params
+// Route::get('/users', function (Request $request) {
+//     // return $request->query('name');
+//     // return $request->only(['name', 'age']);
+//     // return $request->all();
+//     // return $request->input('name', 'Default Name'); // works with query params and form fields unlike $request->query()
+//     return $request->except(['name']);
+// });
+
+// Response Object
+// Route::get('/response', function () {
+//     // return response("<h1>Hello Laravel<h1>", 200)->header('Content-Type', 'text/html');
+//     return response('<h1>Hello World</h1>')->cookie(
+//         'name', 'viviana'
+//     );
+// });
+
+// Route::get('/json', function () {
+//     return response()->json([
+//         'waifu' => 'skadi',
+//         'sex' => 'female'
+//     ]);
+// });
+
+// Route::get('/download', function () {
+//     return response()->download(public_path(('favicon.ico')));
+// });
+
+
+// // Get cookie route
+// Route::get('/read-cookie', function (Request $request) {
+//     $cookieValue = $request->cookie('name');
+//     return response()->json(['cookie' => $cookieValue]);
+// });
