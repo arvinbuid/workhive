@@ -1,16 +1,9 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\JobController;
+use App\Http\Controllers\HomeController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/jobs', function () {
-    return '<h1>Available Jobs.';
-});
-
-/// Route with constraint
-Route::get('/jobs/{id}/comments/{commentId}', function (string $id, string $commentId) {
-    return 'Post ' . $id . ' Comment ' . $commentId;
-})->whereNumber('id')->whereNumber('commentId'); 
+Route::get('/', [HomeController::class, 'index']);
+Route::get('/jobs', [JobController::class, 'index']);
+Route::get('/create', [JobController::class, 'create']);
