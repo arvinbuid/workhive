@@ -6,9 +6,11 @@ use Illuminate\Http\Request;
 
 class JobController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     */
     public function index()
     {
-        $title = 'Available Jobs';
         $jobs = [
             'Software Engineer',
             'Cybersecurity',
@@ -16,24 +18,55 @@ class JobController extends Controller
             'UI/UX Designer'
         ];
 
-        return view('/jobs.index', compact('title', 'jobs'));
+        return view('jobs.index', compact('jobs'));
     }
 
+    /**
+     * Show the form for creating a new resource.
+     */
     public function create()
     {
-        return view('/jobs.create');
+        return view('jobs.create');
     }
 
-    public function show(string $id)
-    {
-        return "Job Id: $id";
-    }
-
+    /**
+     * Store a newly created resource in storage.
+     */
     public function store(Request $request)
     {
-        $title = $request->input('title');
-        $description = $request->input('description');
+        return $request->input('title');
+        return $request->input('description');
+    }
 
-        return "Job title: $title <br /> Job description: $description";
+    /**
+     * Display the specified resource.
+     */
+    public function show(string $id)
+    {
+        return "Job post $id";
+    }
+
+    /**
+     * Show the form for editing the specified resource.
+     */
+    public function edit(string $id)
+    {
+        //
+    }
+
+    /**
+     * Update the specified resource in storage.
+     */
+    public function update(Request $request, string $id)
+    {
+        //
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(string $id)
+    {
+        //
     }
 }
