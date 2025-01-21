@@ -4,11 +4,18 @@
             <a href="{{ url('/') }}">Workhive</a>
         </h1>
         <nav class="hidden md:flex items-center space-x-4">
-            <a href="{{ url('/jobs') }}" class="text-white hover:underline py-2">All Jobs</a>
-            <a href="{{ url('/jobs/saved') }}" class="text-white hover:underline py-2">Saved Jobs</a>
-            <a href="{{ url('/login') }}" class="text-white hover:underline py-2">Login</a>
-            <a href="{{ url('/register') }}" class="text-white hover:underline py-2">Register</a>
-            <a href="{{ url('/dashboard') }}" class="text-white hover:underline py-2">
+            <a href="{{ url('/jobs') }}"
+                class="hover:underline py-2 {{ request()->is('jobs') ? 'text-yellow-400' : 'text-white' }}">All
+                Jobs</a>
+            <a href="{{ url('/jobs/saved') }}"
+                class="hover:underline py-2 {{ request()->is('jobs/saved') ? 'text-yellow-400' : 'text-white' }}">Saved
+                Jobs</a>
+            <a href="{{ url('/login') }}"
+                class="hover:underline py-2 {{ request()->is('login') ? 'text-yellow-400' : 'text-white' }}">Login</a>
+            <a href="{{ url('/register') }}"
+                class="hover:underline py-2 {{ request()->is('register') ? 'text-yellow-400' : 'text-white' }}">Register</a>
+            <a href="{{ url('/dashboard') }}"
+                class="hover:underline py-2 {{ request()->is('dashboard') ? 'text-yellow-400' : 'text-white' }}">
                 <i class="fa fa-gauge mr-1"></i> Dashboard
             </a>
             <a href="{{ url('/jobs/create') }}"
