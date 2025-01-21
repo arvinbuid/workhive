@@ -18,6 +18,7 @@
     @if (request()->is('/'))
         <x-hero title='Find your Dream Job' />
     @endif
+    <x-top-banner />
     <main class="container mx-auto p-4 mt-4">
         {{ $slot }}
     </main>
