@@ -4,24 +4,17 @@
             <a href="{{ url('/') }}">Workhive</a>
         </h1>
         <nav class="hidden md:flex items-center space-x-4">
-            <a href="{{ url('/jobs') }}"
-                class="hover:underline py-2 {{ request()->is('jobs') ? 'text-yellow-400' : 'text-white' }}">All
-                Jobs</a>
-            <a href="{{ url('/jobs/saved') }}"
-                class="hover:underline py-2 {{ request()->is('jobs/saved') ? 'text-yellow-400' : 'text-white' }}">Saved
-                Jobs</a>
-            <a href="{{ url('/login') }}"
-                class="hover:underline py-2 {{ request()->is('login') ? 'text-yellow-400' : 'text-white' }}">Login</a>
-            <a href="{{ url('/register') }}"
-                class="hover:underline py-2 {{ request()->is('register') ? 'text-yellow-400' : 'text-white' }}">Register</a>
-            <a href="{{ url('/dashboard') }}"
-                class="hover:underline py-2 {{ request()->is('dashboard') ? 'text-yellow-400' : 'text-white' }}">
-                <i class="fa fa-gauge mr-1"></i> Dashboard
-            </a>
-            <a href="{{ url('/jobs/create') }}"
-                class="bg-yellow-500 hover:bg-yellow-600 text-black px-4 py-2 rounded hover:shadow-md transition duration-300">
-                <i class="fa fa-edit"></i> Create Job
-            </a>
+            <!-- Login, Register, Dashboard: icon -->
+            <x-nav-link url='/' :active="request()->is('/')">Home</x-nav-link>
+            <x-nav-link url='/jobs' :active="request()->is('jobs')">All Jobs</x-nav-link>
+            <x-nav-link url='/jobs/saved' :active="request()->is('jobs/saved')">Saved Jobs</x-nav-link>
+            <x-nav-link url='/login' :active="request()->is('login')">Login</x-nav-link>
+            <x-nav-link url='/register' :active="request()->is('register')">Register</x-nav-link>
+            <x-nav-link url='/dashboard' :active="request()->is('dashboard')" icon="gauge">Dashboard</x-nav-link>
+
+            <x-button-link url='/jobs/create' icon="edit">
+                Create Job
+            </x-button-link>
         </nav>
         <button id="hamburger" class="text-white md:hidden flex items-center">
             <i class="fa fa-bars text-2xl"></i>
