@@ -1,13 +1,4 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create | Workhive</title>
-</head>
-
-<body>
+<x-layout>
     <h1>Create a Job</h1>
     <form action="/jobs" method="POST">
         @csrf
@@ -15,6 +6,4 @@
         <input type="text" name="description" placeholder="Enter job description...">
         <button type="submit">Submit</button>
     </form>
-</body>
-
-</html>
+</x-layout>
