@@ -1,5 +1,5 @@
 <div>
-    <ul>
+    <ul class="flex gap-2 p-4">
         <li><a href="/">Home</a></li>
         <li><a href="/jobs">Jobs</a></li>
         <li><a href="/jobs/create">Create</a></li>
