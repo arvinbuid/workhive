@@ -18,6 +18,8 @@ return new class extends Migration
         Schema::table('job_listings', function (Blueprint $table) {
             // salary, tags, job_type, remote, requirements, benefits, address, city, state, zipcode, contact_email, contact_phone
             // company_name, company description, company_logo, company_website
+            $table->unsignedBigInteger('user_id')->after('id');
+
             $table->integer('salary');
             $table->string('tags')->nullable(); // nullable means that the field is not required
             $table->enum('job_type', ['Full Time', 'Part Time', 'Contract', 'On-Call', 'Temporary', 'Internship', 'Volunteer'])->default('Full Time');
@@ -34,6 +36,9 @@ return new class extends Migration
             $table->text('company_description')->nullable();
             $table->string('company_logo')->nullable();
             $table->string('company_website')->nullable();
+
+            // Add user foreign key restraint
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 
@@ -43,6 +48,9 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('job_listings', function (Blueprint $table) {
+            $table->dropForeign(['user_id']);
+            $table->dropColumn('user_id');
+
             $table->dropColumn(['salary', 'tags', 'job_type', 'remote', 'requirements', 'benefits', 'address', 'city', 'state', 'zipcode', 'contact_email', 'contact_phone', 'company_name', 'company_description', 'company_logo', 'company_website']);
         });
     }
