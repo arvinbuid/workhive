@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Job;
 use Illuminate\Http\Request;
+use Illuminate\View\View;
 
 class JobController extends Controller
 {
@@ -38,9 +39,9 @@ class JobController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Job $job): View // Model Binding makes this process easier and clean.
     {
-        return "Job post $id";
+        return view('jobs.show')->with('job', $job);
     }
 
     /**
