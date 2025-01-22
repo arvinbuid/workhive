@@ -33,12 +33,15 @@ class JobController extends Controller
      */
     public function store(Request $request): RedirectResponse
     {
-        $title = $request->input('title');
-        $description = $request->input('description');
+        // Add validation before creating a new job listing
+        $validatedData = $request->validate([
+            'title' => 'required|string|max:255',
+            'description' => 'required|string'
+        ]);
 
         Job::create([
-            'title' => $title,
-            'description' => $description
+            'title' => $validatedData['title'],
+            'description' => $validatedData['description'],
         ]);
 
         return redirect()->route('jobs.index');
