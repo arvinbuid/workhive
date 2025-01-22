@@ -22,7 +22,7 @@ return new class extends Migration
 
             $table->integer('salary');
             $table->string('tags')->nullable(); // nullable means that the field is not required
-            $table->enum('job_type', ['Full Time', 'Part Time', 'Contract', 'On-Call', 'Temporary', 'Internship', 'Volunteer'])->default('Full Time');
+            $table->enum('job_type', ['Full-Time', 'Part-Time', 'Contract', 'On-Call', 'Temporary', 'Internship', 'Volunteer'])->default('Full-Time');
             $table->boolean('remote')->default(false);
             $table->text('requirements')->nullable();
             $table->text('benefits')->nullable();
