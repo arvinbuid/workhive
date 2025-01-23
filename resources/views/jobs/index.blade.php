@@ -1,11 +1,13 @@
 <x-layout>
     <x-slot name="title">Workhive | Jobs</x-slot>
-    <h1>Available Jobs</h1>
+    <h1 class="text-2xl mb-4">Available Jobs</h1>
     <ul>
-        @forelse($jobs as $job)
-            <li><a href={{ route('jobs.show', $job->id) }}>{{ $job->title }}</a> - {{ $job->description }}</li>
-        @empty
-            <li>No jobs available.</li>
-        @endforelse
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+            @forelse($jobs as $job)
+                <x-job-card :job="$job" />
+            @empty
+                <p>No jobs available.</p>
+            @endforelse
+        </div>
     </ul>
 </x-layout>
