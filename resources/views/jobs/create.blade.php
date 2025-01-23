@@ -146,7 +146,7 @@
                 <label class="block text-gray-700" for="company_logo">Company Logo</label>
                 <input id="company_logo" type="file" name="company_logo"
                     class="w-full px-4 py-2 border rounded focus:outline-none @error('company_logo') border-red-500 @enderror" />
-                @error('description')
+                @error('company_logo')
                     <p class="text-red-500 mt-1">{{ $message }}</p>
                 @enderror
             </div>
