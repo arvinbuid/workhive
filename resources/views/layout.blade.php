@@ -10,6 +10,7 @@
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href={{ asset('css/style.css') }}>
     <title>{{ $title ?? 'Workhive | Find all jobs online' }}</title>
+    <script src="//unpkg.com/alpinejs" defer></script>
     @vite('resources/css/app.css')
 </head>
 
