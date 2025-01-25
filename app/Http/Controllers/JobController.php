@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Job;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Storage;
 
@@ -119,7 +120,7 @@ class JobController extends Controller
 
         // Check for image
         if ($request->hasFile('company_logo')) {
-            // Delete logo if already exists
+            // Delete company logo if already exists
             Storage::delete('public/logos/' . basename($job->company_logo));
 
             // Store the file and get path
@@ -138,8 +139,14 @@ class JobController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Job $job): RedirectResponse
     {
-        //
+        // Delete company logo if already exists
+        Storage::delete('public/logos/' . basename($job->company_logo));
+
+        // Delete job
+        $job->delete();
+
+        return redirect()->route('jobs.index')->with('success', 'Job listing deleted successfully.');
     }
 }
