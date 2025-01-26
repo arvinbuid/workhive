@@ -97,7 +97,7 @@ class JobController extends Controller
     public function update(Request $request, Job $job)
     {
         // Deny this action if a user is not authorized
-        $this->authorize('create', $job);
+        $this->authorize('update', $job);
 
         // Add validation before creating a new job listing
         $validatedData = $request->validate([
