@@ -2,15 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Job;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use App\Models\Job;
 
 class JobController extends Controller
 {
+    use AuthorizesRequests;
+
     // @desc    Show all job listings
     // @route   GET /jobs
     public function index(): View
@@ -83,6 +86,9 @@ class JobController extends Controller
     // @route   GET /jobs/{$id}/edit
     public function edit(Job $job)
     {
+        // Deny this action if a user is not authorized
+        $this->authorize('update', $job);
+
         return view('jobs.edit')->with('job', $job);
     }
 
@@ -90,6 +96,9 @@ class JobController extends Controller
     // @route   PUT /jobs/{$id}
     public function update(Request $request, Job $job)
     {
+        // Deny this action if a user is not authorized
+        $this->authorize('create', $job);
+
         // Add validation before creating a new job listing
         $validatedData = $request->validate([
             'title' => 'required|string|max:255',
@@ -134,6 +143,9 @@ class JobController extends Controller
     // @route   DELETE /jobs/{$id}
     public function destroy(Job $job): RedirectResponse
     {
+        // Deny this action if a user is not authorized
+        $this->authorize('delete', $job);
+
         // Delete company logo if already exists
         Storage::delete('public/logos/' . basename($job->company_logo));
 
