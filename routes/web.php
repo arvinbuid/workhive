@@ -10,7 +10,11 @@ use App\Http\Controllers\RegisterController;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 // This will take care of index, create, store, show, edit, update, delete of job controller methods
-Route::resource('jobs', JobController::class);
+// Route::resource('jobs', JobController::class);
+
+// Add middleware to protect routes
+Route::resource('jobs', JobController::class)->middleware('auth')->only(['create', 'edit', 'update', 'destroy']);
+Route::resource('jobs', JobController::class)->except(['create', 'edit', 'update', 'destroy']);
 
 // Login & register routes
 Route::get('/register', [RegisterController::class, 'register'])->name('register');
