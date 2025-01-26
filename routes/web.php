@@ -16,9 +16,11 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::resource('jobs', JobController::class)->middleware('auth')->only(['create', 'edit', 'update', 'destroy']);
 Route::resource('jobs', JobController::class)->except(['create', 'edit', 'update', 'destroy']);
 
-// Login & register routes
-Route::get('/register', [RegisterController::class, 'register'])->name('register');
-Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
-Route::get('/login', [LoginController::class, 'login'])->name('login');
-Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
+// Group the login & register routes and add guest middleware to all
+Route::middleware('guest')->group(function () {
+    Route::get('/register', [RegisterController::class, 'register'])->name('register');
+    Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+    Route::get('/login', [LoginController::class, 'login'])->name('login');
+    Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
+});
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
