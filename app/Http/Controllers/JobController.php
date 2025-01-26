@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Job;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
 use Illuminate\Support\Facades\Storage;
 
@@ -54,8 +54,8 @@ class JobController extends Controller
             'company_website' => 'nullable|url',
         ]);
 
-        // Hardcoded User ID (no authentication yet)
-        $validatedData['user_id'] = 1;
+        // Assign job listing to currently logged in user
+        $validatedData['user_id'] = Auth::user()->id;
 
         // Check for image
         if ($request->hasFile('company_logo')) {
