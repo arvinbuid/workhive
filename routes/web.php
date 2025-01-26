@@ -6,6 +6,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
+use App\Http\Controllers\DashboardController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -23,4 +24,8 @@ Route::middleware('guest')->group(function () {
     Route::get('/login', [LoginController::class, 'login'])->name('login');
     Route::post('/login', [LoginController::class, 'authenticate'])->name('login.authenticate');
 });
+
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
+
+// Dashboard route
+Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
