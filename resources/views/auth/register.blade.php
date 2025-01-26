@@ -12,7 +12,7 @@
 
             <button type="submit"
                 class="w-full text-white mt-1 px-4 py-2 rounded bg-blue-500 hover:bg-blue-600 focus:outline-none">
-                Login
+                Register
             </button>
 
             <p class="text-gray-500 mt-3">
