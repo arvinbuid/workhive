@@ -7,6 +7,7 @@ use App\Http\Controllers\LoginController;
 use App\Http\Controllers\LogoutController;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\ProfileController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
@@ -27,5 +28,5 @@ Route::middleware('guest')->group(function () {
 
 Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
-// Dashboard route
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
+Route::put('/profile', [ProfileController::class, 'update'])->middleware('auth')->name('profile.update');
