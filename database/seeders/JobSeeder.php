@@ -18,10 +18,10 @@ class JobSeeder extends Seeder
         $jobListings = include database_path('seeders/data/job_listings.php');
 
         // Get test user id
-        $testUserId = User::where('email', 'test@example.com')->value('id');
+        $testUserId = User::where('email', 'skadi@example.com')->value('id');
 
         // Get all other user ids from the user model excluding $testUserId
-        $userIds = User::where('email', '!=', 'test@example.com')->pluck('id')->toArray();
+        $userIds = User::where('email', '!=', 'skadi@example.com')->pluck('id')->toArray();
 
         // Loop through job listings
         foreach ($jobListings as $index => &$listing) {

@@ -16,8 +16,8 @@ class TestUserSeeder extends Seeder
     public function run()
     {
         $user = User::create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
+            'name' => 'Skadi',
+            'email' => 'skadi@example.com',
             'email_verified_at' => Carbon::now(),
             'password' => Hash::make('12345678')
         ]);
