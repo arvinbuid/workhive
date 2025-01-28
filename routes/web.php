@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\BookmarkController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobController;
 use App\Http\Controllers\HomeController;
@@ -30,3 +31,8 @@ Route::post('/logout', [LogoutController::class, 'logout'])->name('logout');
 
 Route::get('/dashboard', [DashboardController::class, 'index'])->middleware('auth')->name('dashboard');
 Route::put('/profile', [ProfileController::class, 'update'])->middleware('auth')->name('profile.update');
+
+// Bookmarked jobs
+Route::middleware('auth')->group(function () {
+    Route::get('/bookmarks', [BookmarkController::class, 'index'])->name('bookmark.index');
+});
