@@ -109,15 +109,23 @@
                     <i class="fas fa-info-circle mr-3"></i>You must be logged in to bookmark a job.
                 </p>
             @else
-                <form method="POST" action={{ route('bookmarks.store', $job->id) }}>
+                <form method="POST"
+                    action={{ auth()->user()->bookmarkedJobs()->where('job_id', $job->id)->exists() ? route('bookmarks.destroy', $job->id) : route('bookmarks.store', $job->id) }}>
                     @csrf
-                    <button
-                        class="w-full mt-4 py-2 bg-blue-600 hover:bg-blue-700 text-white px-4 rounded-full flex justify-center items-center">
-                        <i class="fas fa-bookmark mr-3"></i>Bookmark
-                    </button>
+                    @if (auth()->user()->bookmarkedJobs()->where('job_id', $job->id)->exists())
+                        @method('DELETE')
+                        <button
+                            class="w-full mt-4 py-2 bg-red-600 hover:bg-red-700 text-white px-4 rounded-full flex justify-center items-center">
+                            <i class="fas fa-bookmark mr-3"></i>Delete Bookmark
+                        </button>
+                    @else
+                        <button
+                            class="w-full mt-4 py-2 bg-blue-600 hover:bg-blue-700 text-white px-4 rounded-full flex justify-center items-center">
+                            <i class="fas fa-bookmark mr-3"></i>Bookmark Job
+                        </button>
+                    @endif
                 </form>
             @endguest
         </aside>
     </div>
-
 </x-layout>

@@ -14,7 +14,6 @@ class BookmarkController extends Controller
     // @route GET /bookmarks
     public function index(): View
     {
-        // Get authenticated user
         $user = Auth::user();
 
         // Get bookmarked job listings
@@ -24,7 +23,7 @@ class BookmarkController extends Controller
     }
 
     // @desc Create new bookmarked job
-    // @route POST /bookmarks
+    // @route POST /bookmarks/{job}
     public function store(Job $job): RedirectResponse
     {
         $user = Auth::user();
@@ -38,5 +37,22 @@ class BookmarkController extends Controller
         $user->bookmarkedJobs()->attach($job->id);
 
         return back()->with('success', 'Job bookmarked successfully.');
+    }
+
+    // @desc Delete bookmarked job
+    // @route DELETE /bookmarks/{job}
+    public function destroy(Job $job): RedirectResponse
+    {
+        $user = Auth::user();
+
+        // Check if job is not bookmarked
+        if (!$user->bookmarkedJobs()->where('job_id', $job->id)->exists()) {
+            return back()->with('error', 'Job is not bookmarked.');
+        }
+
+        // Delete the bookmark
+        $user->bookmarkedJobs()->detach($job->id);
+
+        return back()->with('success', 'Bookmark deleted successfully.');
     }
 }
