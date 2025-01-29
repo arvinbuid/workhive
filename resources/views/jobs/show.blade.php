@@ -103,10 +103,20 @@
                 <a href={{ $job->company_website }} target="_blank" class="text-blue-500">Visit Website</a>
             @endif
 
-            <a href=""
-                class="{{ $job->company_website ? 'mt-10' : 'mt-3' }} bg-blue-500 hover:bg-blue-600 text-white font-bold w-full py-2 px-4 rounded-full flex items-center justify-center"><i
-                    class="fas fa-bookmark mr-3"></i> Bookmark
-                Listing</a>
+            <!-- Bookmark Job Button -->
+            @guest
+                <p class="mt-8 bg-gray-200 text-gray-700 w-full font-bold text-center py-2 px-4 rounded-full">
+                    <i class="fas fa-info-circle mr-3"></i>You must be logged in to bookmark a job.
+                </p>
+            @else
+                <form method="POST" action={{ route('bookmarks.store', $job->id) }}>
+                    @csrf
+                    <button
+                        class="w-full mt-4 py-2 bg-blue-600 hover:bg-blue-700 text-white px-4 rounded-full flex justify-center items-center">
+                        <i class="fas fa-bookmark mr-3"></i>Bookmark
+                    </button>
+                </form>
+            @endguest
         </aside>
     </div>
 

@@ -3,7 +3,7 @@
         Bookmarked Jobs
     </h3>
 
-    <div class="grid grid-cols-1 md:grid-cols-3">
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
         @forelse($bookmarks as $bookmark)
             <x-job-card :job="$bookmark" />
         @empty
