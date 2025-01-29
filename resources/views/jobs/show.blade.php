@@ -74,14 +74,53 @@
                         </p>
                     </div>
                 @endif
-                <p class="my-5">
-                    Put "Job Application" as the subject of your email
-                    and attach your resume.
-                </p>
-                <a href="mailto:{{ $job->contact_email }}"
-                    class="block w-full text-center px-5 py-2.5 shadow-sm rounded border text-base font-medium cursor-pointer text-indigo-700 bg-indigo-100 hover:bg-indigo-200">
-                    Apply Now
-                </a>
+
+                @auth
+                    <p class="my-5">
+                        Put "Job Application" as the subject of your email
+                        and attach your resume.
+                    </p>
+
+                    <!-- Modal -->
+                    <div x-data="{ open: false }">
+                        <button @click="open = true"
+                            class="block w-full text-center px-5 py-2.5 shadow-sm rounded border text-base font-medium cursor-pointer text-indigo-700 bg-indigo-100 hover:bg-indigo-200">
+                            Apply Now
+                        </button>
+
+                        <div x-cloak x-show="open"
+                            class="fixed inset-0 flex items-center justify-center bg-gray-900 bg-opacity-50">
+                            <div @click.outside="open = false" class="bg-white rounded-lg w-full max-w-md p-6 shadow-md">
+                                <h3 class="text-lg font-semibold text-center mb-4">Apply for {{ $job->title }}</h3>
+
+                                <form enctype="multipart/form-data">
+                                    @csrf
+                                    <x-inputs.text id="full_name" name="full_name" label="Full Name" placeholder="Full Name"
+                                        :required="true" />
+                                    <x-inputs.text id="contact_phone" name="contact_phone" label="Contact Phone"
+                                        placeholder="Contact Phone" />
+                                    <x-inputs.text id="contact_email" name="contact_email" label="Contact Email"
+                                        placeholder="Contact Email" :required="true" />
+                                    <x-inputs.text-area id="message" name="message" label="Message" placeholder="Message"
+                                        rows="3" cols="12" />
+                                    <x-inputs.text id="location" name="location" label="Location" placeholder="Location" />
+                                    <x-inputs.file id="resume" name="resume" label="Resume" :required="true" />
+
+                                    <button type="submit"
+                                        class="bg-blue-500 hover:bg-blue-600 text-white rounded-md px-4 py-2">Apply
+                                        Now</button>
+                                    <button type="submit" @click="open = false"
+                                        class="bg-gray-500 hover:bg-gray-600 text-white rounded-md px-4 py-2">Cancel</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                @else
+                    <p class="my-5 bg-gray-200 rounded-xl px-5 py-3">
+                        <i class="fas fa-info-circle mr-3"></i> You must be logged in to apply for this job.
+                    </p>
+                @endauth
+                <!-- End Modal -->
             </div>
         </section>
 
