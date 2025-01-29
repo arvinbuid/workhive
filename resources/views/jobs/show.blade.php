@@ -93,7 +93,8 @@
                             <div @click.outside="open = false" class="bg-white rounded-lg w-full max-w-md p-6 shadow-md">
                                 <h3 class="text-lg font-semibold text-center mb-4">Apply for {{ $job->title }}</h3>
 
-                                <form enctype="multipart/form-data">
+                                <form enctype="multipart/form-data" method="POST"
+                                    action="{{ route('applicant.store', $job->id) }}">
                                     @csrf
                                     <x-inputs.text id="full_name" name="full_name" label="Full Name" placeholder="Full Name"
                                         :required="true" />

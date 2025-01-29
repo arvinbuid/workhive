@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ApplicantController;
 use App\Http\Controllers\BookmarkController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\JobController;
@@ -38,3 +39,6 @@ Route::middleware('auth')->group(function () {
     Route::post('/bookmarks/{job}', [BookmarkController::class, 'store'])->name('bookmarks.store');
     Route::delete('/bookmarks/{job}', [BookmarkController::class, 'destroy'])->name('bookmarks.destroy');
 });
+
+// Applications
+Route::post('/jobs/{job}/apply', [ApplicantController::class, 'store'])->middleware('auth')->name('applicant.store');
