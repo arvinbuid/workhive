@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 
 class ApplicantController extends Controller
 {
-    // @desc Store new job application
+    // @desc  Store new job application
     // @route POST /jobs/{job}/apply
     public function store(Request $request, Job $job): RedirectResponse
     {
@@ -37,5 +37,15 @@ class ApplicantController extends Controller
         $application->save();
 
         return redirect()->back()->with('success', 'Your application has been submitted successfully.');
+    }
+
+    // @desc  Delete application
+    // @route DELETE /applicants/{applicant}
+    public function destroy($id): RedirectResponse
+    {
+        $applicant = Applicant::findOrFail($id);
+        $applicant->delete();
+
+        return redirect()->route('dashboard')->with('success', 'Job application deleted successfully.');
     }
 }
