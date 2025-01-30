@@ -31,11 +31,11 @@
 
         {{-- Job Listings --}}
         <div class="bg-white p-8 rounded-lg shadow-md w-full">
-            <h3 class="text-3xl text-center font-bold mb-10">My Job Listings</h3>
+            <h3 class="text-3xl text-center font-bold mb-4">My Job Listings</h3>
             @forelse($jobs as $job)
                 <div class="flex justify-between items-center border-gray-200 border-b-2 py-2">
                     <div>
-                        <h3 class="text-xl font-semibold mb-2">{{ $job->title }}</h3>
+                        <h3 class="text-xl font-semibold mt-4">{{ $job->title }}</h3>
                         <p class="text-gray-700">{{ $job->job_type }}</p>
                     </div>
                     <div class="flex items-center space-x-3">
@@ -55,6 +55,31 @@
                         <!-- End Delete Form -->
                     </div>
                 </div>
+
+                {{-- Job Applications --}}
+                <div class="mt-4">
+                    @forelse ($job->applicants as $applicant)
+                        <h3 class="text-lg font-semibold mb-3">Applicant </h3>
+                        <div class="my-3">
+                            <p class="text-gray-800"><strong>Name: </strong> {{ $applicant->full_name }}</p>
+                            <p class="text-gray-800"><strong>Contact Number: </strong> {{ $applicant->contact_phone }}
+                            </p>
+                            <p class="text-gray-800"><strong>Email: </strong> {{ $applicant->contact_email }}</p>
+                            <p class="mt-3 mb-6">
+                                <a href={{ asset('storage/' . $applicant->resume_path) }}
+                                    class="text-blue-600 hover:underline" download><i
+                                        class="fas fa-download mr-2"></i>Download
+                                    resume</a>
+                            </p>
+                        </div>
+
+                    @empty
+                        <p class="text-xl">There is no job application for this job listing.</p>
+                    @endforelse
+                </div>
+
+
+
             @empty
                 <p class="text-xl">You have no job listings.</p>
             @endforelse
