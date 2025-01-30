@@ -12,11 +12,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\ProfileController;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
-
-// This will take care of index, create, store, show, edit, update, delete of job controller methods
-// Route::resource('jobs', JobController::class);
-
-// Add middleware to protect routes
+Route::get('/jobs/search', [JobController::class, 'search'])->name('jobs.search');
 Route::resource('jobs', JobController::class)->middleware('auth')->only(['create', 'edit', 'update', 'destroy']);
 Route::resource('jobs', JobController::class)->except(['create', 'edit', 'update', 'destroy']);
 
@@ -43,3 +39,6 @@ Route::middleware('auth')->group(function () {
 // Applications
 Route::post('/jobs/{job}/apply', [ApplicantController::class, 'store'])->middleware('auth')->name('applicant.store');
 Route::delete('/applicants/{applicant}', [ApplicantController::class, 'destroy'])->middleware('auth')->name('applicant.destroy');
+
+// This will take care of index, create, store, show, edit, update, delete of job controller methods
+// Route::resource('jobs', JobController::class);
