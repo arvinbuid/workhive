@@ -82,7 +82,7 @@
                     </p>
 
                     <!-- Modal -->
-                    <div x-data="{ open: false }">
+                    <div x-data="{ open: false }" id="applicant-form">
                         <button @click="open = true"
                             class="block w-full text-center px-5 py-2.5 shadow-sm rounded border text-base font-medium cursor-pointer text-indigo-700 bg-indigo-100 hover:bg-indigo-200">
                             Apply Now
@@ -123,7 +123,13 @@
                 @endauth
                 <!-- End Modal -->
             </div>
+
+            {{-- Map --}}
+            <div class="bg-white p-6 rounded-lg shadow-md">
+                <div id="map"></div>
+            </div>
         </section>
+
 
         <!-- Sidebar -->
         <aside class="bg-white rounded-lg shadow-md p-3">
@@ -169,3 +175,42 @@
         </aside>
     </div>
 </x-layout>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const map = L.map('map').setView([40, -74.5], 9);
+
+        // Initialize the Leaflet map
+        L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            zoom: 13,
+            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+        }).addTo(map);
+
+        // Get address from Laravel view
+        const city = '{{ $job->city }}';
+        const state = '{{ $job->state }}';
+        const address = city + ', ' + state;
+
+        // Geocode the address
+        fetch(`https://nominatim.openstreetmap.org/search?format=json&q=${encodeURIComponent(address)}`)
+            .then((response) => response.json())
+            .then((data) => {
+                if (data.length > 0) {
+                    const latitude = parseFloat(data[0].lat);
+                    const longitude = parseFloat(data[0].lon);
+
+                    // Center the map and add a marker
+                    map.setView([latitude, longitude], 14);
+
+                    L.marker([latitude, longitude])
+                        .addTo(map)
+                        .bindPopup(`${city}, ${state}`)
+                        .openPopup();
+                } else {
+                    console.error('No results found for the address.');
+                }
+            })
+            .catch((error) => console.error('Error geocoding address:', error));
+    });
+</script>
