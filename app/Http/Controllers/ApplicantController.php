@@ -47,8 +47,8 @@ class ApplicantController extends Controller
         $application->user_id = auth()->id();
         $application->save();
 
-        // Send email to owner
-        Mail::to($job->user->email)->send(new JobApplied($application, $job));
+        // Send email to owner (Will be uncommented after mailtrap compliance form is complete)
+        // Mail::to($job->user->email)->send(new JobApplied($application, $job));
 
         return redirect()->back()->with('success', 'Your application has been submitted successfully.');
     }
