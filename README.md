@@ -2,7 +2,7 @@
 
 Workhive is a job listing website built with Laravel 11.
 
-<img src="./public/images/screen.png" alt="Workhive Image" />
+<img src="./public/images/screen.jpg" alt="Workhive Image" />
 
 ## Features
 
